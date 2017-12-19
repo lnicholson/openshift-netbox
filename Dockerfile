@@ -25,7 +25,11 @@ RUN yum install -y gcc \
         graphviz \
         openssl-devel \
         redhat-rpm-config \
-        openldap-devel
+        openldap-devel \
+	nginx \
+	uwsgi \
+	uwsgi-plugin-python3
+	
 
 #Contents of netbox 
 ADD /netbox /opt/netbox
@@ -36,10 +40,9 @@ ADD /pip /opt/pip
 #Install PIP3 (PYTHON) dependencies
 RUN python3 /opt/pip/get-pip.py
 RUN pip3 install -r /opt/netbox/requirements.txt
-RUN pip3 install napalm
-RUN pip3 install django-auth-ldap
-
-
+RUN pip3 install napalm \
+	django-auth-ldap
+	
 #TEMP ENV VARS    ### REMOVE for openshift
 ENV DB_NAME netbox
 ENV DB_USER netbox
