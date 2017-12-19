@@ -58,10 +58,12 @@ ENV FQDN localhost
 
 
 #Create and prepare docker entrypoint
-ADD docker-entrypoint.sh /sbin
+ADD docker-entrypoint.sh startnetbox /sbin/
 RUN chmod +x /sbin/docker-entrypoint.sh \
+	&& chmod +x /sbin/startnetbox \
         && mkdir -p /var/log/netbox
 
 
 #MAKE SURE TO ADD LDAP STUFF http://netbox.readthedocs.io/en/stable/installation/ldap/
-CMD ["docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["startnetbox"]

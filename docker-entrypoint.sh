@@ -36,10 +36,6 @@ sed -i -e "s/FQDN/$(echo $FQDN)/g" /opt/netbox/netbox/netbox/nginx.conf
 ##########################      RUN CMD    ########################################
 ###################################################################################
 
-/usr/sbin/nginx
-uwsgi --ini /opt/netbox/netbox/netbox/uwsgi.ini
-sleep infinity
-
-#exec "$@"
+exec "$@"
 
 

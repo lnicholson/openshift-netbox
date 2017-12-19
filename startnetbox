@@ -1,0 +1,4 @@
+#!/bin/bash
+uwsgi --ini /opt/netbox/netbox/netbox/uwsgi.ini
+nginx
+sleep infinity
