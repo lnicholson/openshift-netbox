@@ -1,6 +1,8 @@
 #!/bin/bash
-set -e
+##  Docker Entrypoint for NETBOX on Openshift
+##  MAINTAINER smacktrace <smacktrace942@gmail.com>
 
+set -e
 
 ###################################################################################
 ###################### PREP POSTGRES CONFIG FILE  #################################
@@ -33,6 +35,7 @@ sed -i -e "s/FQDN/$(echo $FQDN)/g" /opt/netbox/netbox/netbox/nginx.conf
 ###################################################################################
 ##########################      RUN CMD    ########################################
 ###################################################################################
+
 /usr/sbin/nginx
 uwsgi --ini /opt/netbox/netbox/netbox/uwsgi.ini
 sleep infinity
