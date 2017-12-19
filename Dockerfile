@@ -62,5 +62,4 @@ RUN chmod +x /sbin/docker-entrypoint.sh \
         && mkdir -p /var/log/netbox
 
 #MAKE SURE TO ADD LDAP STUFF http://netbox.readthedocs.io/en/stable/installation/ldap/
-ENTRYPOINT [ "/sbin/docker-entrypoint.sh" ]
-CMD ["/bin/bash"]
+CMD ["docker-entrypoint.sh"]

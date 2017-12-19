@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 
 ###################################################################################
@@ -34,6 +35,8 @@ sed -i -e "s/FQDN/$(echo $FQDN)/g" /opt/netbox/netbox/netbox/nginx.conf
 ###################################################################################
 /usr/sbin/nginx
 uwsgi --ini /opt/netbox/netbox/netbox/uwsgi.ini
-exec "$@"
+sleep infinity
+
+#exec "$@"
 
 
