@@ -20,10 +20,20 @@ sed -i -e "s/DB_HOST/$(echo $DB_HOST)/g" /opt/netbox/netbox/netbox/configuration
 #Insert DJANGO_SECRET_KEY
 sed -i -e "s/DJANGO_SECRET_KEY/$(echo $DJAGNO_SECRET_KEY)/g" /opt/netbox/netbox/netbox/configuration.py
 
+#Insert FQDN
+sed -i -e "s/FQDN/$(echo $FQDN)/g" /opt/netbox/netbox/netbox/configuration.py
+
+###################################################################################
+##########################      PREP NGINX    #####################################
+###################################################################################
+
+sed -i -e "s/FQDN/$(echo $FQDN)/g" /opt/netbox/netbox/netbox/nginx.conf
 
 ###################################################################################
 ##########################      RUN CMD    ########################################
 ###################################################################################
+/usr/sbin/nginx
+uwsgi --ini /opt/netbox/netbox/netbox/uwsgi.ini
 exec "$@"
 
 
