@@ -64,5 +64,14 @@ RUN chmod +x /sbin/docker-entrypoint.sh \
 
 
 #MAKE SURE TO ADD LDAP STUFF http://netbox.readthedocs.io/en/stable/installation/ldap/
+
+RUN chmod -R 777 /var/log/netbox && \
+	chmod 750 /etc/nginx && \
+	chmod 770 /run && \
+	chgrp -R 0 /var /opt  && \
+	chmod -R g=u /var /opt && \
+	chmod g=u /etc/passwd
+
+EXPOSE 8000
 ENTRYPOINT [ "docker-entrypoint.sh" ]
 CMD ["nginx", "-g", "daemon off;"]
