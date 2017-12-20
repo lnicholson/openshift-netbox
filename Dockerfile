@@ -39,7 +39,6 @@ ADD /netbox /opt/netbox
 ADD /pip /opt/pip
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY uwsgi /etc/init.d/uwsgi
 
 #Install PIP3 (PYTHON) dependencies
 RUN python3 /opt/pip/get-pip.py \
@@ -58,12 +57,12 @@ ENV FQDN localhost
 
 
 #Create and prepare docker entrypoint
-ADD docker-entrypoint.sh startnetbox /sbin/
+ADD docker-entrypoint.sh /sbin
 RUN chmod +x /sbin/docker-entrypoint.sh \
-	&& chmod +x /sbin/startnetbox \
-        && mkdir -p /var/log/netbox
+        && mkdir -p /var/log/netbox \
+        && usermod -a -G root nginx 
 
 
 #MAKE SURE TO ADD LDAP STUFF http://netbox.readthedocs.io/en/stable/installation/ldap/
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["startnetbox"]
+ENTRYPOINT [ "docker-entrypoint.sh" ]
+CMD ["nginx", "-g", "daemon off;"]
