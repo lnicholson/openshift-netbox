@@ -75,3 +75,4 @@ RUN chmod -R 777 /var/log/netbox && \
 EXPOSE 8000
 ENTRYPOINT [ "docker-entrypoint.sh" ]
 CMD ["nginx", "-g", "daemon off;"]
+USER 1001
